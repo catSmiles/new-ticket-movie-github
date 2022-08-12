@@ -21,12 +21,12 @@ function Footer() {
                 </svg>
               </div>
               <span className="self-center text-2xl font-semibold">
-                Brand name
+                Cyberlearn
               </span>
             </a>
           </div>
           <div className="col-span-6 text-center md:text-left md:col-span-3">
-            <p className="pb-1 text-lg font-medium">Category</p>
+            <p className="pb-1 text-lg font-medium">CYBERSOFT</p>
             <ul>
               <li>
                 <a
