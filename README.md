@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Cài đặt thư viện
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tổ chức thư mục
 
-## Available Scripts
+- Link website: https://reboot.studio/blog/folder-structures-to-organize-react-project/
 
-In the project directory, you can run:
+  src/
+  |-- assets/
+  |
+  |
+  |-- components/
+  | |-- Film/
+  | | |-- Film.js
+  | |-- Slick/
+  | | |-- MultipleRows.js
+  |
+  |
+  |-- pages/
+  | |-- Home/
+  | | |-- Home.js
+  | | |-- HomeMenu
+  | | | |-- HomeMenu.js
+  | |-- Contact/
+  | | |-- Contact.js
+  | |-- News/
+  | | |-- News.js
+  | |-- Login
+  | |-- Register
+  |
+  |-- redux/
+  | |-- actions/
+  | | |-- CarouselAction.js
+  | | |-- types/
+  | | | |-- CarouselType.js
+  | |-- reducers
+  | | |-- CarouselReducer.js
+  | | |-- MovieManagerReducer =.js
+  | |
+  | |-- types
+  | |-- configStore.js
+  |
+  |-- services
+  | |-- baseServices.js
 
-### `npm start`
+  |
+  |-- templates/
+  | |-- AdminTemplate/
+  | | |-- AdminTemplate.js
+  | |
+  |
+  | |-- HomeTemplate/
+  | | |-- Layout/
+  | | | |-- Header/
+  | | | | |-- Header.js
+  | | | |-- HomeCarousel/
+  | | | | |-- HomeCarousel.js
+  | | | |-- Footer/
+  | | | | |-- Footer.js
+  | | |-- HomeTemplate.js
+  |
+  |
+  |
+  |
+  |-- util/
+  | |-- settings
+  | | |-- congfig.js
+  |
+  |
+  |-- App.js
+  |-- index.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Using UI template on websites:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Keyword: mambaui sử dụng Tailwind CSS xây dụng UI
+- Desc: MAMBA UI sử dụng Tailwind CSS xây dụng UI
+- Link: https://mambaui.com/docs
+- I used header component
+  - link: https://mambaui.com/components/header
 
-### `npm test`
+### HomeTemplate
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Header: using mambaui.com
+- HomeCarousel: using ant.design
 
-### `npm run build`
+# Cấu hình Routing cho Header
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Search class "max-w-screen-xl" trong tailwindcss --> Set max-width of screen
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Su dung thu vien react-slick
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Cài đặt thư viện React-slick
