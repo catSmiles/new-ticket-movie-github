@@ -9,6 +9,10 @@ import { store } from './redux/configStore';
 // ant.design
 import 'antd/dist/antd.css';
 
+//reactslick css
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 // Includes: tailwindcss + ......
 import './index.css';
 
