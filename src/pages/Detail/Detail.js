@@ -81,7 +81,7 @@ function Detail(props) {
             </h1>
             <h1
               style={{ marginLeft: '16px' }}
-              className="text-green-400 text-2xl"
+              className="text-green-400 text-2xl mb-4"
             >
               <Rate
                 allowHalf
@@ -90,9 +90,7 @@ function Detail(props) {
               />
             </h1>
             <div className={`c100 p${filmDetail.danhGia * 10} big`}>
-              <p className="text-white text-base ml-4 mt-1">
-                {filmDetail.danhGia * 10}%
-              </p>
+              <span className="text-white">{filmDetail.danhGia * 10}%</span>
               <div className="slice">
                 <div className="bar"></div>
                 <div className="fill"></div>
@@ -157,7 +155,7 @@ function Detail(props) {
                                   .map((lichChieu, index) => {
                                     return (
                                       <NavLink
-                                        to="/"
+                                        to={`/checkout/${lichChieu.maLichChieu}`}
                                         key={index}
                                         className="col-span-1 text-green-800 font-bold"
                                       >
