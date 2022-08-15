@@ -3,6 +3,8 @@
 import { useEffect } from 'react';
 import HomeMenu from './HomeMenu/HomeMenu';
 import { layDanhSachPhimAction } from '../../redux/actions/QuanLyPhimActions';
+import { layDanhSachHeThongRapAction } from '../../redux/actions/QuanLyRapActions';
+import HomeCarousel from '../../templates/HomeTemplate/layouts/HomeCarousel/HomeCarousel';
 
 // Kêt nối redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,6 +14,7 @@ import MultipleRowSlick from '../../components/RSlick/MultipleRowSlick';
 function Home(props) {
   console.log('Home: ', props);
   const { arrFilm } = useSelector((state) => state.QuanLyPhimReducer);
+  const { heThongRapChieu } = useSelector((state) => state.QuanLyRapReducer);
   console.log('arrFilm: ', arrFilm);
   const dispatch = useDispatch();
   console.log('propsHome: ', arrFilm);
@@ -19,6 +22,7 @@ function Home(props) {
   useEffect(() => {
     const action = layDanhSachPhimAction();
     dispatch(action); //dispatch function từ thunk
+    dispatch(layDanhSachHeThongRapAction());
   }, []);
 
   // const renderFilms = () => {
@@ -29,6 +33,7 @@ function Home(props) {
 
   return (
     <>
+      <HomeCarousel />
       <section className="text-gray-600 body-font">
         <div className="container max-w-screen-xl px-5 py-24 mx-auto">
           <MultipleRowSlick arrFilm={arrFilm} />
@@ -40,7 +45,7 @@ function Home(props) {
           </div> */}
         </div>
       </section>
-      <HomeMenu />
+      <HomeMenu heThongRapChieu={heThongRapChieu} />
     </>
   );
 }

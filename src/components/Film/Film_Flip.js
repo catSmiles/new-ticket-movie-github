@@ -1,4 +1,6 @@
 import { PlayCircleOutlined } from '@ant-design/icons';
+// import { NavLink } from 'react-router-dom';
+import { history } from '../../App';
 import './Film_Flip.css';
 
 export default function Film_Flip(props) {
@@ -44,7 +46,12 @@ export default function Film_Flip(props) {
           </div>
         </div>
       </div>
-      <div className="text-center cursor-pointer py-2 bg-indigo-300 my-2 text-success-50 font-bold">
+      <div
+        onClick={() => {
+          history.push(`/detail/${item.maPhim}`);
+        }}
+        className="text-center cursor-pointer py-2 bg-indigo-300 my-2 text-success-50 font-bold"
+      >
         ĐẶT VÉ
       </div>
     </div>

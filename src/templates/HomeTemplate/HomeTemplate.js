@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import Footer from './layouts/Footer/Footer';
 import Header from './layouts/Header/Header';
-import HomeCarousel from './layouts/HomeCarousel/HomeCarousel';
+// import HomeCarousel from './layouts/HomeCarousel/HomeCarousel';
 
 function HomeTemplate({ Component, ...props }) {
   //path, exact, Component
@@ -12,7 +12,7 @@ function HomeTemplate({ Component, ...props }) {
         return (
           <>
             <Header {...propsRoute} />
-            <HomeCarousel {...propsRoute} />
+            {/* <HomeCarousel {...propsRoute} /> */}
             <Component {...propsRoute} />
             <Footer />
           </>
