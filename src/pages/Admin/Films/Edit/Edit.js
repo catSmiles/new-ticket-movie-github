@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import {
   Form,
   Input,
@@ -14,28 +14,44 @@ import {
 } from 'antd';
 import { useFormik } from 'formik';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
-import { themPhimUploadHinhAction } from '../../../../redux/actions/QuanLyPhimActions';
+// import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  capNhatPhimUploadAction,
+  layThongTinPhimAction,
+  // themPhimUploadHinhAction,
+} from '../../../../redux/actions/QuanLyPhimActions';
 import { GROUPID } from '../../../../util/settings/config';
-import _ from 'lodash';
 
-const AddNew = () => {
+const Edit = (props) => {
   const [componentSize, setComponentSize] = useState('default');
+  const { thongTinPhim } = useSelector((state) => state.QuanLyPhimReducer);
+  console.log('thongTinPhim', thongTinPhim);
   const [imgSrc, setImgSrc] = useState('');
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    let { id } = props.match.params;
+
+    dispatch(layThongTinPhimAction(id));
+  }, []);
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      tenPhim: '',
-      trailer: '',
-      moTa: '',
-      ngayKhoiChieu: '',
-      dangChieu: false,
-      sapChieu: false,
-      hot: false,
-      danhGia: 0,
-      hinhAnh: {},
+      maPhim: thongTinPhim.maPhim,
+      dangChieu: thongTinPhim.dangChieu,
+      sapChieu: thongTinPhim.sapChieu,
+      hot: thongTinPhim.hot,
+      danhGia: thongTinPhim.danhGia,
+      tenPhim: thongTinPhim.tenPhim,
+      trailer: thongTinPhim.trailer,
+      moTa: thongTinPhim.moTa,
+      maNhom: GROUPID,
+      ngayKhoiChieu: thongTinPhim.ngayKhoiChieu,
+      hinhAnh: null,
     },
+
     onSubmit: (values) => {
       console.log('values', values);
       values.maNhom = GROUPID;
@@ -45,17 +61,19 @@ const AddNew = () => {
         if (key !== 'hinhAnh') {
           formData.append(key, values[key]);
         } else {
-          formData.append('File', values.hinhAnh, values.hinhAnh.name);
+          if (values.hinhAnh !== null) {
+            formData.append('File', values.hinhAnh, values.hinhAnh.name);
+          }
         }
       }
-      //Gọi api gửi các giá trị formdata về backend xử lý
-      dispatch(themPhimUploadHinhAction(formData));
+      //Cập nhật phim upload hình
+      dispatch(capNhatPhimUploadAction(formData));
     },
   });
 
   const handleChangeDatePicker = (value) => {
     // console.log('datepickerchange',);
-    let ngayKhoiChieu = moment(value).format('DD/MM/YYYY');
+    let ngayKhoiChieu = moment(value);
     formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu);
   };
 
@@ -71,7 +89,7 @@ const AddNew = () => {
     };
   };
 
-  const handleChangeFile = (e) => {
+  const handleChangeFile = async (e) => {
     //Lấy file ra từ e
     let file = e.target.files[0];
     if (
@@ -80,6 +98,8 @@ const AddNew = () => {
       file.type === 'image/gif' ||
       file.type === 'image/png'
     ) {
+      //Đem dữ liệu file lưu vào formik
+      await formik.setFieldValue('hinhAnh', file);
       //Tạo đối tượng để đọc file
       let reader = new FileReader();
       reader.readAsDataURL(file);
@@ -87,8 +107,6 @@ const AddNew = () => {
         // console.log(e.target.result);
         setImgSrc(e.target.result); //Hình base 64
       };
-      //Đem dữ liệu file lưu vào formik
-      formik.setFieldValue('hinhAnh', file);
     }
   };
 
@@ -122,32 +140,59 @@ const AddNew = () => {
           </Radio.Group>
         </Form.Item>
         <Form.Item label="Tên phim">
-          <Input name="tenPhim" onChange={formik.handleChange} />
+          <Input
+            name="tenPhim"
+            onChange={formik.handleChange}
+            value={formik.values.tenPhim}
+          />
         </Form.Item>
         <Form.Item label="Trailer">
-          <Input name="trailer" onChange={formik.handleChange} />
+          <Input
+            name="trailer"
+            onChange={formik.handleChange}
+            value={formik.values.trailer}
+          />
         </Form.Item>
         <Form.Item label="Mô tả">
-          <Input name="moTa" onChange={formik.handleChange} />
+          <Input
+            name="moTa"
+            onChange={formik.handleChange}
+            value={formik.values.moTa}
+          />
         </Form.Item>
         <Form.Item label="Ngày khởi chiếu">
-          <DatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} />
+          <DatePicker
+            onChange={handleChangeDatePicker}
+            format="DD/MM/YYYY"
+            value={moment(formik.values.ngayKhoiChieu)}
+          />
         </Form.Item>
         <Form.Item label="Đang chiếu">
-          <Switch onChange={handleChangeSwitch('dangChieu')} />
+          <Switch
+            name="dangChieu"
+            onChange={handleChangeSwitch('dangChieu')}
+            checked={formik.values.dangChieu}
+          />
         </Form.Item>
         <Form.Item label="Sắp chiếu">
-          <Switch onChange={handleChangeSwitch('sapChieu')} />
+          <Switch
+            name="sapChieu"
+            onChange={handleChangeSwitch('sapChieu')}
+            checked={formik.values.sapChieu}
+          />
         </Form.Item>
         <Form.Item label="Hot">
-          <Switch onChange={handleChangeSwitch('hot')} />
+          <Switch
+            name="hot"
+            onChange={handleChangeSwitch('hot')}
+            checked={formik.values.hot}
+          />
         </Form.Item>
 
         <Form.Item label="Số sao">
           <InputNumber
             onChange={handleChangeInputNumber('danhGia')}
-            min={1}
-            max={10}
+            value={formik.values.danhGia}
           />
         </Form.Item>
 
@@ -158,11 +203,16 @@ const AddNew = () => {
             accept="image/png, image/jpeg,image/gif,image/png"
           />
           <br />
-          <img style={{ width: 150, height: 150 }} src={imgSrc} alt="..." />
+          <img
+            width={100}
+            height={100}
+            src={imgSrc === '' ? thongTinPhim.hinhAnh : imgSrc}
+            alt="default"
+          />
         </Form.Item>
-        <Form.Item label="Tác vụ">
+        <Form.Item label="Button">
           <button type="submit" className="bg-blue-300 text-white p-2">
-            Thêm phim
+            Cập nhật
           </button>
         </Form.Item>
       </Form>
@@ -170,4 +220,4 @@ const AddNew = () => {
   );
 };
 
-export default AddNew;
+export default Edit;
