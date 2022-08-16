@@ -55,7 +55,7 @@ function Detail(props) {
                   objectFit: 'cover',
                   borderRadius: '4px',
                 }}
-                alt="123"
+                alt="default"
               />
               <div className="col-span-2 ml-5">
                 <p className="text-sm">

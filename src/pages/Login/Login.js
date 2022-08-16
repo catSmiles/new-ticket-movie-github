@@ -21,7 +21,7 @@ function Login(props) {
       const action = dangNhapAction(values);
       dispatch(action);
 
-      console.log('values', values);
+      console.log('values: ', values);
     },
   });
 
