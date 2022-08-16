@@ -14,6 +14,10 @@ export default function Film_Flip(props) {
             src={item.hinhAnh}
             alt="Avatar"
             style={{ width: 300, height: 300 }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://picsum.photos/300/300';
+            }}
           />
         </div>
         <div
@@ -25,6 +29,10 @@ export default function Film_Flip(props) {
               src={item.hinhAnh}
               alt="Avatar"
               style={{ width: 300, height: 300 }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://picsum.photos/300/300';
+              }}
             />
           </div>
           <div

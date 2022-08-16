@@ -1,6 +1,7 @@
 import './App.css';
 import { createBrowserHistory } from 'history';
-import { Router, Switch, Route } from 'react-router-dom';
+// import { Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 
 import HomeTemplate from './templates/HomeTemplate/HomeTemplate';
 import Home from './pages/Home/Home';
@@ -15,6 +16,11 @@ import Checkout from './pages/Checkout/Checkout';
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import Loading from './components/Loading/Loading';
 import Profile from './pages/Profile/Profile';
+import Dashboard from './pages/Admin/Dashboard/Dashboard';
+import AdminTemplate from './templates/AdminTemplate/AdminTemplate';
+import Films from './pages/Admin/Films/Films';
+import ShowTime from './pages/Admin/ShowTime/ShowTime';
+import AddNew from './pages/Admin/Films/AddNew/AddNew';
 
 // const CheckoutTemplateLazy = lazy(() => import('./templates/CheckoutTemplate/CheckoutTemplate'))
 
@@ -33,6 +39,13 @@ function App() {
         <CheckoutTemplate path="/checkout/:id" exact component={Checkout} />
         <UserTemplate path="/login" exact Component={Login} />
         <UserTemplate path="/register" exact Component={Register} />
+
+        <AdminTemplate path="/admin" exact Component={Dashboard} />
+        <AdminTemplate path="/admin/films" exact Component={Films} />
+        <AdminTemplate path="/admin/films/addnew" exact Component={AddNew} />
+        <AdminTemplate path="/admin/users" exact Component={Dashboard} />
+        <AdminTemplate path="/admin/showtimes" exact Component={ShowTime} />
+
         <HomeTemplate path="/" exact Component={Home} />
       </Switch>
     </Router>
