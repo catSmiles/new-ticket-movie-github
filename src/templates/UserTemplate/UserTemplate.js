@@ -1,9 +1,14 @@
 import { Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const UserTemplate = (props) => {
   //path, exact, Component
 
   const { Component, ...restProps } = props;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <Route
