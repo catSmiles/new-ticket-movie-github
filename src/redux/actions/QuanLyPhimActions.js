@@ -2,11 +2,11 @@ import { quanLyPhimService } from '../../services/QuanLyPhimService';
 import { SET_DANH_SACH_PHIM, SET_THONG_TIN_PHIM } from './types/QuanLyPhimType';
 import { history } from '../../App';
 
-export const layDanhSachPhimAction = () => {
+export const layDanhSachPhimAction = (tenPhim = '') => {
   return async (dispatch) => {
     try {
       //Sử dụng tham số thamSo
-      const result = await quanLyPhimService.layDanhSachPhim();
+      const result = await quanLyPhimService.layDanhSachPhim(tenPhim);
 
       //Sau khi lấy dữ liệu từ api về => redux (reducer)
       dispatch({
@@ -58,6 +58,21 @@ export const layThongTinPhimAction = (maPhim) => {
       });
     } catch (errors) {
       console.log('errors: ', errors);
+    }
+  };
+};
+
+export const xoaPhimAction = (maPhim) => {
+  return async (dispatch) => {
+    try {
+      //Sử dụng tham số thamSo
+      const result = await quanLyPhimService.xoaPhim(maPhim);
+      console.log('result', result.data.content);
+      alert('Xoá phim thành công !');
+      //Sau khi xoá load lại danh sách phim mới;
+      dispatch(layDanhSachPhimAction());
+    } catch (errors) {
+      console.log('errors: ', errors.response?.data);
     }
   };
 };

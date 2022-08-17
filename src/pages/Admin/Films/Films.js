@@ -11,7 +11,10 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { layDanhSachPhimAction } from '../../../redux/actions/QuanLyPhimActions';
+import {
+  layDanhSachPhimAction,
+  xoaPhimAction,
+} from '../../../redux/actions/QuanLyPhimActions';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../../App';
 const { Search } = Input;
@@ -98,7 +101,8 @@ export default function Films() {
     },
     {
       title: 'Hành động',
-      dataIndex: 'hanhDong',
+      // dataIndex: 'hanhDong',
+      dataIndex: 'maPhim',
       render: (text, film) => {
         return (
           <Fragment>
@@ -109,9 +113,25 @@ export default function Films() {
             >
               <EditOutlined style={{ color: 'blue' }} />
             </NavLink>
-            <NavLink key={2} className="text-2xl" to="/">
+            {/* <NavLink key={2} className="text-2xl" to="/">
               <DeleteOutlined style={{ color: 'red' }} />
-            </NavLink>
+            </NavLink> */}
+            <span
+              style={{ cursor: 'pointer' }}
+              key={2}
+              className="text-2xl"
+              onClick={() => {
+                //Gọi action xoá
+                if (
+                  window.confirm('Bạn có chắc muốn xoá phim ' + film.tenPhim)
+                ) {
+                  //Gọi action
+                  dispatch(xoaPhimAction(film.maPhim));
+                }
+              }}
+            >
+              <DeleteOutlined style={{ color: 'red' }} />
+            </span>
           </Fragment>
         );
       },
@@ -121,14 +141,18 @@ export default function Films() {
   ];
   const data = arrFilmDefault;
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    console.log(value);
+    //Gọi api layDanhSachPhim
+    dispatch(layDanhSachPhimAction(value));
+  };
 
   function onChange(pagination, filters, sorter, extra) {
-    console.log('params', pagination, filters, sorter, extra);
+    console.log('params: ', pagination, filters, sorter, extra);
   }
 
   return (
-    <div>
+    <Fragment>
       <h3 className="text-4xl">Quản lý Phim</h3>
       <Button
         className="mb-5"
@@ -146,7 +170,13 @@ export default function Films() {
         size="large"
         onSearch={onSearch}
       />
-      <Table columns={columns} dataSource={data} onChange={onChange} />
-    </div>
+      {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        rowKey={'maPhim'}
+      />
+    </Fragment>
   );
 }
