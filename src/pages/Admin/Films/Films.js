@@ -9,6 +9,7 @@ import {
   EditOutlined,
   SearchOutlined,
   DeleteOutlined,
+  CalendarOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -132,6 +133,16 @@ export default function Films() {
             >
               <DeleteOutlined style={{ color: 'red' }} />
             </span>
+            <NavLink
+              key={1}
+              className=" mr-2 text-2xl"
+              to={`/admin/films/showtime/${film.maPhim}/${film.tenPhim}`}
+              onClick={() => {
+                localStorage.setItem('filmParams', JSON.stringify(film));
+              }}
+            >
+              <CalendarOutlined style={{ color: 'green' }} />{' '}
+            </NavLink>
           </Fragment>
         );
       },

@@ -77,7 +77,8 @@ function Header() {
           {/** ul - added class mb-0 */}
           <li className="flex">
             <NavLink
-              to="/home"
+              // to="/home"
+              to="/"
               className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent border-violet-600 text-white"
             >
               Home
